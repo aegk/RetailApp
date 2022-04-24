@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailApp.Domain", "RetailA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{FC838D64-CAFC-4480-97C3-976243057C23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailApp.Infrastructure", "RetailApp.Infrastructure\RetailApp.Infrastructure.csproj", "{954F4636-0249-42F3-9C27-E312156492FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{666133EB-67B3-42D0-BBAC-1DDA52848EB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{666133EB-67B3-42D0-BBAC-1DDA52848EB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{666133EB-67B3-42D0-BBAC-1DDA52848EB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{954F4636-0249-42F3-9C27-E312156492FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{954F4636-0249-42F3-9C27-E312156492FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{954F4636-0249-42F3-9C27-E312156492FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{954F4636-0249-42F3-9C27-E312156492FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,6 +46,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{073A0DA0-F009-4998-BDD3-8AA200F3F970} = {83A2D78B-2CE9-4DE8-8170-531D9EBC75D7}
 		{666133EB-67B3-42D0-BBAC-1DDA52848EB6} = {9D9B7343-F04D-4414-8145-906857EE7062}
+		{954F4636-0249-42F3-9C27-E312156492FE} = {FC838D64-CAFC-4480-97C3-976243057C23}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2AA24747-EABF-4B40-A1B2-E08DEECD548C}
