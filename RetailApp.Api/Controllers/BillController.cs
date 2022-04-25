@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RetailApp.Api.MiddleWare;
 using RetailApp.Api.ViewModels.Request;
 using RetailApp.Api.ViewModels.Response;
 using RetailApp.Application.Commands.Bill;
+using AuthorizeAttribute = RetailApp.Api.MiddleWare.AuthorizeAttribute;
 
 namespace RetailApp.Api.Controllers
 {

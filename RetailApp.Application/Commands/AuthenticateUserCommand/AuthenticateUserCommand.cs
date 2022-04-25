@@ -12,5 +12,9 @@ namespace RetailApp.Application.Commands.AuthenticateUserCommand
     {
         public string Email { get; set; }
         public string Password { get; set; }
+        /// <summary>
+        /// For Test
+        /// </summary>
+        public int CustomerType { get; set; }
     }
 }

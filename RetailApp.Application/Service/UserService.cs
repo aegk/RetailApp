@@ -12,6 +12,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Http;
 
 namespace RetailApp.Application.Service
 {
@@ -20,8 +21,8 @@ namespace RetailApp.Application.Service
         private readonly IMapper _mapper;
         private readonly IRepository<User> _userRepository;
         private readonly IConfiguration _configuration;
-        private readonly AuthorizationFilterContext _context;
-        public UserService(IRepository<User> userRepository, IMapper mapper, IConfiguration configuration,AuthorizationFilterContext context)
+        private readonly IHttpContextAccessor _context;
+        public UserService(IRepository<User> userRepository, IMapper mapper, IConfiguration configuration, IHttpContextAccessor context)
         {
             _userRepository = userRepository;
             _mapper = mapper;
@@ -29,12 +30,13 @@ namespace RetailApp.Application.Service
             _context = context;
         }
 
-        public async Task<AuthenticationUser> AuthenticateAndGenerateSecret(string email, string password)
+        public async Task<AuthenticationUser> AuthenticateAndGenerateSecret(string email, string password, int customerType)
         {
-            var user = await GetUser(email, password);
+            var user = await GetUser(email, password,customerType);
             if (user == null) return null;
             var token = GenerateJWTToken(email, password);
             user.Secret = token;
+            _context.HttpContext.Items["User"] = user;
             return user;
         }
 
@@ -63,8 +65,22 @@ namespace RetailApp.Application.Service
 
         public async Task<AuthenticationUser> GetCurrentUser()
         {
-            var user = (AuthenticationUser)_context.HttpContext.Items["User"];
+            
+            var user = _context.HttpContext.Items["User"] as AuthenticationUser;
             return user;
+        }
+
+        /// <summary>
+        /// For Test
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <param name="customerType"></param>
+        /// <returns></returns>
+        public async Task<AuthenticationUser> GetUser(string email, string password, int customerType)
+        {
+            var user = await _userRepository.GetUserAsync(email, password, customerType);
+            return _mapper.Map<AuthenticationUser>(user);
         }
 
         public async Task<AuthenticationUser> GetUser(string email, string password)

@@ -8,12 +8,12 @@ namespace RetailApp.Api.MiddleWare
 {
     public class JwtMiddleware
     {
-        private readonly RequestDelegate _requestDelegate;
+        private readonly RequestDelegate _next;
         private readonly IConfiguration _config;
 
-        public JwtMiddleware(RequestDelegate requestDelegate, IConfiguration config)
+        public JwtMiddleware(RequestDelegate next, IConfiguration config)
         {
-            _requestDelegate = requestDelegate;            
+            _next = next;            
             _config = config;
         }
 
@@ -22,7 +22,7 @@ namespace RetailApp.Api.MiddleWare
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             if (token != null)
                 await InitializeUserToContext(context, userService,token);
-            await _requestDelegate(context);
+            await _next(context);
         }
 
         private async Task InitializeUserToContext(HttpContext context, IUserService userService, string token)
@@ -43,8 +43,8 @@ namespace RetailApp.Api.MiddleWare
                 }, out SecurityToken validatedToken);
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
-                var merchantId = jwtToken.Claims.First(x => x.Type == "merchantId").Value.ToString();
-                var apiKey = jwtToken.Claims.First(x => x.Type == "apiKey").Value.ToString();
+                var merchantId = jwtToken.Claims.First(x => x.Type == "useremail").Value.ToString();
+                var apiKey = jwtToken.Claims.First(x => x.Type == "password").Value.ToString();
 
                 context.Items["User"] = await userService.GetUser(merchantId, apiKey);
             }

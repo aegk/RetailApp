@@ -20,7 +20,7 @@ namespace RetailApp.Application.Commands.AuthenticateUserCommand
 
         public async Task<AuthenticationUser> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
         {
-            var authenticatedUser = await _userService.AuthenticateAndGenerateSecret(request.Email, request.Password);
+            var authenticatedUser = await _userService.AuthenticateAndGenerateSecret(request.Email, request.Password, request.CustomerType);
             if (authenticatedUser == null)
                 throw new Exception(message: "User Not Found");
             return authenticatedUser;

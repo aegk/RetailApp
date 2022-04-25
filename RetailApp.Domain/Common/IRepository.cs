@@ -10,6 +10,15 @@ namespace RetailApp.Domain.Common
 {
     public interface IRepository<T> where T : Entity
     {
-       Task<User> GetUserAsync(string email, string password);
+        /// <summary>
+        /// for test
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <param name="customerType"></param>
+        /// <returns></returns>
+       Task<User> GetUserAsync(string email, string password, int customerType);
+
+        Task<User> GetUserAsync(string email, string password);
     }
 }

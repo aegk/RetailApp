@@ -13,16 +13,16 @@ namespace RetailApp.Application.Commands.Bill
     public class BillDiscountCommandHandler : IRequestHandler<BillDiscountCommand, BillDto>
     {
         private readonly IBillDiscountService _discountService;
-        private readonly IUserService _userService;
+       // private readonly IUserService _userService;
 
-        public BillDiscountCommandHandler(IBillDiscountService discountService, IUserService userService)
+        public BillDiscountCommandHandler(IBillDiscountService discountService) //, IUserService userService
         {
             _discountService = discountService;
-            _userService = userService;
+            //_userService = userService;
         }
         public async Task<BillDto> Handle(BillDiscountCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userService.GetCurrentUser();
+            var user = new AuthenticationUser();//await _userService.GetCurrentUser();
             var bill = new BillDto();
 
             if (user.CustomerType == (int)CustomerType.Employee)

@@ -14,21 +14,22 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddCors();
 builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor();
+//builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//builder.Services.AddMediatR(typeof(Initializer).Assembly);
-
-var assemblies = new Assembly[]
+builder.Services.AddMediatR(typeof(Initializer).Assembly);
+  var assemblies = new Assembly[]
     {
         typeof(Program).Assembly,
         typeof(Initializer).Assembly,
     };
 
 builder.Services.AddAutoMapper(assemblies);
-//builder.Services.AddAuthentication();
+//builder.Services.AddScoped<AuthorizeAttribute,>;
 //builder.Services.AddAuthorization();
 
 //builder.Services.AddScoped<IRequestHandler<BillDiscountCommand, BillDto>, BillDiscountCommandHandler>();
@@ -37,7 +38,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 //builder.Services.AddScoped<IRequestHandler<AuthenticateUserCommand, AuthenticationUser>, AuthenticateUserCommandHandler>();
-//
+
 
 
 
