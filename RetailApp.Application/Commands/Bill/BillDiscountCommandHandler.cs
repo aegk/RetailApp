@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RetailApp.Application.Commands.Bill
 {
-    internal class BillDiscountCommandHandler : IRequestHandler<BillDiscountCommand, BillDto>
+    public class BillDiscountCommandHandler : IRequestHandler<BillDiscountCommand, BillDto>
     {
         private readonly IBillDiscountService _discountService;
         private readonly IUserService _userService;

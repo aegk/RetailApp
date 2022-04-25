@@ -9,6 +9,14 @@ namespace RetailApp.Application.Service
 {
     public interface IUserService
     {
-        Task<AuthenticationUser> GetCurrentUser(CancellationToken cancellationToken = default);
+        Task<AuthenticationUser> GetById(int Id);
+        Task<AuthenticationUser> GetUser(string email, string password);
+
+        Task<AuthenticationUser> AuthenticateAndGenerateSecret(string email, string password);
+
+        public string GenerateJWTToken(string email, string password);
+
+        Task<AuthenticationUser> GetCurrentUser();
+
     }
 }

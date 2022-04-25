@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RetailApp.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -9,6 +10,6 @@ namespace RetailApp.Domain.Common
 {
     public interface IRepository<T> where T : Entity
     {
-        Task<T> GetById(int id);
+       Task<User> GetUserAsync(string email, string password);
     }
 }
